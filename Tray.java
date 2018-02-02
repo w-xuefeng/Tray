@@ -66,7 +66,6 @@ public class Tray {
 		});
 		Platform.setImplicitExit(false);
 		URL url = null;
-		;
 		try {
 			url = new URL(icon);
 		} catch (MalformedURLException e3) {
