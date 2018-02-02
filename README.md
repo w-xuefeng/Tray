@@ -7,3 +7,25 @@
 
  
 >参考文档：https://stackoverflow.com/questions/12571329/javafx-app-in-system-tray
+
+## 使用示例
+
+```Java
+	minButton.setOnAction(new EventHandler<ActionEvent>() {
+		//监听最小化按钮事件
+    	@Override
+    	public void handle(ActionEvent event) {
+    		//primaryStage.setIconified(true);
+    		//最小化Stage到任务栏
+    		Tray taryWindow = new Tray(primaryStage, Session.iconUrl, title);
+    		taryWindow.tray();
+    		//最小化Stage到系统托盘
+    	}
+	});    	
+```
+
+## 效果示例
+
+![image](img/1.png)
+
+![image](img/2.png)

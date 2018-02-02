@@ -117,6 +117,7 @@ public class Tray {
 		});
 		exit.addActionListener(new ActionListener() {
 			public void actionPerformed(java.awt.event.ActionEvent e) {
+				tray.remove(trayIcon);
 				Platform.runLater(new Runnable() {
 					public void run() {
 						primaryStage.close();
