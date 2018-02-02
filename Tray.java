@@ -20,10 +20,10 @@ public class Tray {
 	public Stage primaryStage;
 	public SystemTray tray;
 	public String icon;
-	public String title;	
-	
+	public String title;
+
 	public Tray() {
-		super();		
+		super();
 	}
 
 	public Tray(Stage primaryStage, String icon, String title) {
@@ -31,7 +31,7 @@ public class Tray {
 		this.primaryStage = primaryStage;
 		this.tray = SystemTray.getSystemTray();
 		this.icon = icon;
-		this.title = title;		
+		this.title = title;
 	}
 
 	public Stage getPrimaryStage() {
@@ -58,72 +58,73 @@ public class Tray {
 		this.icon = icon;
 	}
 
-	public void tray(){
-		 Platform.runLater(new Runnable() {
-		    public void run() {
-		    	primaryStage.hide();
-		    }
+	public void tray() {
+		Platform.runLater(new Runnable() {
+			public void run() {
+				primaryStage.hide();
+			}
 		});
-	   Platform.setImplicitExit(false);
-	   URL url = null;;
+		Platform.setImplicitExit(false);
+		URL url = null;
+		;
 		try {
 			url = new URL(icon);
-		} catch (MalformedURLException e3) {					
+		} catch (MalformedURLException e3) {
 			e3.printStackTrace();
 		}
-	   BufferedImage image = null;
+		BufferedImage image = null;
 		try {
-			image = ImageIO.read(url.openStream());	
-		} catch (IOException e2) {					
+			image = ImageIO.read(url.openStream());
+		} catch (IOException e2) {
 			e2.printStackTrace();
 		}
-		PopupMenu pop = new PopupMenu();			
+		PopupMenu pop = new PopupMenu();
 		MenuItem show = new MenuItem("打开程序");
 		MenuItem exit = new MenuItem("退出程序");
 		pop.add(show);
 		pop.add(exit);
-		
-	   TrayIcon trayIcon = new TrayIcon(image, title, pop);
-	   trayIcon.setImageAutoSize(true);
-	   trayIcon.setToolTip(title);
-	   try {
-			tray.add(trayIcon);
-		} catch (AWTException e1) {					
-			e1.printStackTrace();
-		} 		
 
-	   trayIcon.addMouseListener(new MouseAdapter() {	 		
+		TrayIcon trayIcon = new TrayIcon(image, title, pop);
+		trayIcon.setImageAutoSize(true);
+		trayIcon.setToolTip(title);
+		try {
+			tray.add(trayIcon);
+		} catch (AWTException e1) {
+			e1.printStackTrace();
+		}
+
+		trayIcon.addMouseListener(new MouseAdapter() {
 			public void mouseClicked(java.awt.event.MouseEvent e) {
-	      if (e.getClickCount() == 2) {
-					tray.remove(trayIcon); 
+				if (e.getClickCount() == 2) {
+					tray.remove(trayIcon);
 					Platform.runLater(new Runnable() {
-					    public void run() {
-					    	primaryStage.show();
-					    }
+						public void run() {
+							primaryStage.show();
+						}
 					});
-	      }
-	 		}
-	   });
-	   
-	   show.addActionListener(new ActionListener() {		 
-		   public void actionPerformed(java.awt.event.ActionEvent e) {	 	      	      
-	 		  tray.remove(trayIcon);
-	 		  Platform.runLater(new Runnable() {
-	 			    public void run() {
-	 			    	primaryStage.show();
-	 			    }
-	 			});
-	      }
-	   });
-	   exit.addActionListener(new ActionListener() {
-	      public void actionPerformed(java.awt.event.ActionEvent e) {
-	    	  Platform.runLater(new Runnable() {
-	    		    public void run() {
-	    		    	primaryStage.close();
-	    		    }
-	    		});
-	    	  Platform.exit();
-	      }
-	   });		
+				}
+			}
+		});
+
+		show.addActionListener(new ActionListener() {
+			public void actionPerformed(java.awt.event.ActionEvent e) {
+				tray.remove(trayIcon);
+				Platform.runLater(new Runnable() {
+					public void run() {
+						primaryStage.show();
+					}
+				});
+			}
+		});
+		exit.addActionListener(new ActionListener() {
+			public void actionPerformed(java.awt.event.ActionEvent e) {
+				Platform.runLater(new Runnable() {
+					public void run() {
+						primaryStage.close();
+					}
+				});
+				Platform.exit();
+			}
+		});
 	}
 }
